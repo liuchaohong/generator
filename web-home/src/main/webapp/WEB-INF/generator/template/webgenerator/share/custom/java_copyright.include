@@ -1,6 +1,4 @@
 /*
- * Copyright [rapid-framework.com]
- * Web Site: http://www.rapid-framework.com
- * Since 2005 <#if now??>- ${now?string('yyyy')}</#if>
+ * Since 2010 <#if now??>- ${now?string('yyyy')}</#if>
  */
 
