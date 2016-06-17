@@ -1,0 +1,6 @@
+import java.util.*;
+import ${basePackage}.model.*;
+import ${basePackage}.dao.*;
+import ${basePackage}.service.*;
+import ${basePackage}.query.*;
+import ${basePackage}.util.*;

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/task 
+     	http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+    default-autowire="byName"   >
+
+	<!-- 自动搜索@Controller标注的类 -->
+	<context:component-scan base-package="com.xsj.gen.**.controller"/>
+	
+	<bean class="com.github.rapid.common.web.mvc.annotation.ConventionAnnotationHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:prefix="/pages" 
+		p:suffix=".jsp"  
+		p:redirectHttp10Compatible="false"
+	/>
+	
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />	
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+		<property name="messageConverters">   
+	         <list>   
+	             <bean class = "org.springframework.http.converter.StringHttpMessageConverter">   
+	                <property name = "supportedMediaTypes">
+	                      <list>
+	                          <value>text/html;charset=UTF-8</value>   
+	                          <value>application/json;charset=UTF-8</value>   
+	                     </list>   
+	                </property>   
+	             </bean>
+	             <!-- 
+	             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                 -->   
+	         </list>   
+	   </property>  
+	</bean>  
+	
+	<!-- 支持上传文件 -->  
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size 2MB -->
+		<property name="maxUploadSize">
+			<value>1024000000</value>
+		</property>
+		<property name="defaultEncoding">
+			<value>utf-8</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>10240</value>
+		</property>
+	</bean>	
+	 
+	 <!--定义异常处理页面-->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">outException</prop>
+            </props>
+        </property>
+    </bean>
+    
+</beans>

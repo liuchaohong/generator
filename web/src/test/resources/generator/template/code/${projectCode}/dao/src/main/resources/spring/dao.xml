@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd"
+    default-autowire="byName"   >
+
+    <!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
+	<context:component-scan base-package="${basePackage}.**.dao"/>
+	
+    <!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="${projectCode}Ds" />
+	</bean>
+	
+	<!-- 声明使用注解式事务 -->  
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+	<bean id="${projectCode}JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="${projectCode}Ds"/>
+    </bean>
+    
+	<bean id="${projectCode}DaoParent" abstract="true">
+		 <property name="jdbcTemplate" ref="${projectCode}JdbcTemplate" />  
+	</bean>
+
+    <!-- jdbc数据库分页方言,提供类似hibernate的数据库分页查询,其它方言:OracleDialect,SQLServerDialect,SybaseDialect,DB2Dialect,PostgreSQLDialect,MySQLDialect,DerbyDialect,HSQLDialect -->
+	<bean id="dialect" class="com.github.rapid.common.jdbc.dialect.MySQLDialect" />
+	    
+</beans>
