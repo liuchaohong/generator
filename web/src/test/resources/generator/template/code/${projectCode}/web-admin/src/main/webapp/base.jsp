@@ -18,21 +18,24 @@
 	<link href="${r'${ctx}'}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="${r'${ctx}'}/lib/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- bootstrap -->
+	<!-- bootstrap table -->
 	<link href="${r'${ctx}'}/lib/bootstrap-table/bootstrap-table.css" rel="stylesheet">
 	<script src="${r'${ctx}'}/lib/bootstrap-table/bootstrap-table.js"></script>
 	<script src="${r'${ctx}'}/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 	<script src="${r'${ctx}'}/lib/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
 	<script src="${r'${ctx}'}/lib/bootstrap-table/extensions/export/tableExport.js"></script>
 
+    <!-- My97DatePicker -->
+    <script src="${r'${ctx}'}/lib/My97DatePicker/WdatePicker.js"></script>
+    
+	<!-- multiple-select -->
+	<script src="${r'${ctx}'}/lib/multiple-select/jquery.multiple.select.js"></script>
+	<link href="${r'${ctx}'}/lib/multiple-select/multiple-select.css" rel="stylesheet"  media="screen"/>
+	
 	<!-- highcharts -->
 	<script src="${r'${ctx}'}/lib/highcharts/highcharts.js"></script>
 	<script src="${r'${ctx}'}/lib/highcharts/modules/exporting.js"></script> 
 	<script src="${r'${ctx}'}/lib/highcharts/highchartsUtil.js"></script>
-   
-	<!-- multiple-select -->
-	<script src="${r'${ctx}'}/lib/multiple-select/jquery.multiple.select.js"></script>
-	<link href="${r'${ctx}'}/lib/multiple-select/multiple-select.css" rel="stylesheet"  media="screen"/>
 		
 	<!-- Theme -->
 	<link href="${r'${ctx}'}/css/main.css" rel="stylesheet" type="text/css" />

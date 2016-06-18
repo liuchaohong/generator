@@ -3,6 +3,7 @@ package com.github.generator.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.github.generator.util.StringHelper;
@@ -17,18 +18,17 @@ public class GenColumn {
 	
 	private String comment;
 
-	/**
-	 * 映射属性
-	 * @return
-	 */
+	/** 映射属性 begin **/
 	private String javaType;
 	private String columnNameFirstLower;
 	private String columnNameFirstUpper;
 	private static Map<String, String> javaTypeMap;
+	/** 映射属性 end **/
 	
 	static{//数据类型 => java类型
 		javaTypeMap = new HashMap<String,String>();
 		javaTypeMap.put("int", "Integer");
+		javaTypeMap.put("tinyint", "Integer");
 		javaTypeMap.put("varchar", "String");
 		javaTypeMap.put("datetime", "Date");
 	}
@@ -75,7 +75,15 @@ public class GenColumn {
 
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
-		this.javaType = javaTypeMap.get(dataType);
+		this.javaType = StringUtils.isNotBlank(javaTypeMap.get(dataType)) ? javaTypeMap.get(dataType) : "String" ;
+	}
+
+	public String getDataLength() {
+		return dataLength;
+	}
+
+	public void setDataLength(String dataLength) {
+		this.dataLength = dataLength;
 	}
 
 	public String getComment() {

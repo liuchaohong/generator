@@ -1,28 +1,19 @@
 <#include "/java_copyright.include">
 <#assign className = table.className> 
 <#assign classNameFirstLower = table.classNameFirstLower> 
-package ${basePackage}.dao.impl;
+package ${basePackage}.service.impl;
 
 <#include "/java_imports.include">
-import ${basePackage}.dao.${className}Dao;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import ${basePackage}.model.${className};
+import ${basePackage}.model.Page;
 import ${basePackage}.service.${className}Service;
+import ${basePackage}.model.${className};
+import ${basePackage}.query.${className}Query;
+import ${basePackage}.dao.${className}Dao;
 
 /**
  * tableName: ${table.sqlName}
@@ -39,12 +30,12 @@ public class ${className}ServiceImpl implements ${className}Service {
 	
 	public int insert(${className} entity){
 	    Assert.notNull(entity, "'entity' must be not null");
-	    return ${classNameFirstLower}Dao.insert(${classNameFirstLower});		
+	    return ${classNameFirstLower}Dao.insert(entity);		
 	}
 
 	public int update(${className} entity){
 	    Assert.notNull(entity, "'entity' must be not null");
-	    return ${classNameFirstLower}Dao.update(${classNameFirstLower});		
+	    return ${classNameFirstLower}Dao.update(entity);		
 	}
 	
 	public int[] batchInsert(List<${className}> entities){
@@ -81,4 +72,11 @@ public class ${className}ServiceImpl implements ${className}Service {
 		return ${classNameFirstLower}Dao.getCount(query);
 	}
 	
+	public Page<${className}> getPage(${className}Query query) {
+		Assert.notNull(query, "'query' must be not null");
+		Page<${className}> page = new Page<>();
+		page.setRows(getList(query));
+		page.setTotal(getCount(query));
+		return page;
+	}
 }

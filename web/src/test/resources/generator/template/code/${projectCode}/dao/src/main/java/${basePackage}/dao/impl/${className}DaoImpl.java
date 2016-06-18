@@ -4,25 +4,22 @@
 package ${basePackage}.dao.impl;
 
 <#include "/java_imports.include">
-import ${basePackage}.dao.${className}Dao;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import com.github.rapid.common.util.page.Page;
-import com.xsj.gen.model.Game;
 import com.github.rapid.common.util.ObjectUtil;
 import com.github.rapid.common.beanutils.PropertyUtils;
 import com.github.rapid.common.jdbc.dao.support.BaseSpringJdbcDao;
+import ${basePackage}.dao.${className}Dao;
+import ${basePackage}.model.${className};
+import ${basePackage}.query.${className}Query;
 
 /**
  * tableName: ${table.sqlName}
@@ -49,15 +46,15 @@ public class ${className}DaoImpl extends BaseSpringJdbcDao implements ${classNam
 	
 	public int insert(${className} entity){
 		String sql = "insert into ${table.sqlName} " 
-				 + " (<#list table.columns as column>${column.sqlName}<#if column_has_next>, </#if></#list>) " 
+				 + " (<#list table.notPkColumns as column>${column.sqlName}<#if column_has_next>, </#if></#list>) " 
 				 + " values "
-				 + " (<#list table.columns as column>:${column.columnNameFirstLower}<#if column_has_next>, </#if></#list>)";
-			insertWithGeneratedKey(entity,sql); //for sqlserver:identity and mysql:auto_increment
-			//其它主键生成策略
-			//insertWithOracleSequence(entity,"sequenceName",sql); //oracle sequence: 
-			//insertWithDB2Sequence(entity,"sequenceName",sql); //db2 sequence:
-			//insertWithUUID(entity,sql); //uuid
-			//insertWithAssigned(entity,sql); //手工分配		
+				 + " (<#list table.notPkColumns as column>:${column.columnNameFirstLower}<#if column_has_next>, </#if></#list>)";
+		return insertWithGeneratedKey(entity,sql); //for sqlserver:identity and mysql:auto_increment
+		//其它主键生成策略
+		//insertWithOracleSequence(entity,"sequenceName",sql); //oracle sequence: 
+		//insertWithDB2Sequence(entity,"sequenceName",sql); //db2 sequence:
+		//insertWithUUID(entity,sql); //uuid
+		//insertWithAssigned(entity,sql); //手工分配		
 	}
 
 	public int update(${className} entity){

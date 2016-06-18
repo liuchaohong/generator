@@ -57,7 +57,7 @@ public class StringHelper {
 	}
 	
 	public static String replace(String str){
-		return str.replace("`", "").replace("[", "").replace("]", "");
+		return str.replace("`", "").replace("'", "").replace("[", "").replace("]", "");
 	}
 	
 	//首字母转小写

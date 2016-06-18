@@ -12,14 +12,14 @@
 <rapid:override name="content">
 	<h2 id="title" class="text-center">创建${className}</h2>
 	
-	<form:form id="inputForm" method="post" cssClass="form-horizontal" action="${r'${ctx}'}/game/insert.do" modelAttribute="game" >
+	<form:form id="inputForm" method="post" cssClass="form-horizontal" action="${r'${ctx}'}/${classNameFirstLower}/insert.do" modelAttribute="game" >
 		  
 		<%@include file="form_include.jsp" %>
 		
 		<div class="form-group">
 		    <div class="text-center">
 				<input name="submitButton" id="submitButton" value="提交" class="btn btn-primary" type="submit"  />&nbsp;&nbsp;&nbsp;
-				<a class="btn btn-default" href="${r'${ctx}'}/game/index.do">返回列表</a>&nbsp;&nbsp;&nbsp;
+				<a class="btn btn-default" href="${r'${ctx}'}/${classNameFirstLower}/index.do">返回列表</a>&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btn btn-default" value="后退" onclick="history.back();"/>
 		    </div>
 		</div>

@@ -4,7 +4,7 @@
 <#assign classNameFirstLower = table.classNameFirstLower>
 <#assign dollar = '$'>
 <#macro editFormatterParams><#list table.pkColumns as column><#if column_index == 0>+'${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}<#else>+'&${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}</#if></#list></#macro>
-<#macro queryParams><#list table.columns as column><#if column_index == 0>+'${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}<#else>+'&${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}</#if></#list></#macro>	
+<#macro queryParams><#list table.columns as column><#if column_index == 0>+'${column.columnNameFirstLower}='+${column.columnNameFirstLower}<#else>+'&${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}</#if></#list></#macro>	
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/commons/taglibs.jsp" %>
@@ -25,7 +25,7 @@
 
 	    function query(){
 	    	<#list table.columns as column>
-	    	var ${column.columnNameFirstLower} = ${dollar}{'#${column.columnNameFirstLower}'}.val();
+	    	var ${column.columnNameFirstLower} = ${dollar}('#${column.columnNameFirstLower}').val();
 	    	</#list>
 	    	var $table = ${dollar}('#${classNameFirstLower}Table');
 	    	$table.bootstrapTable('refresh', {url: '/${classNameFirstLower}/page.do?'<@queryParams/>});
@@ -47,28 +47,12 @@
 				<div class="col-sm-3">
 					<div class="input-group">
 						<#if column.isDateTimeColumn>
-						<div class="input-group-addon">开始
-							<#if column.comment??>
-							${column.comment}
-							< #else>
-							${column.columnNameFirstLower}
-							</#if>	
-						</div>
-						<input id="${column.columnNameFirstLower}" class="form-control input-from-control" placeholder="开始时间" value="<fmt:formatDate value='<@jspEl "query."+column.columnNameFirstLower+'Begin'/>' pattern='yyyy-MM-dd'/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="${column.columnNameFirstLower}Begin" name="${column.columnNameFirstLower}Begin"   />
-						<div class="input-group-addon">结束
-							<#if column.comment??>
-							${column.comment}
-							< #else>
-							${column.columnNameFirstLower}
-							</#if>							
-						</div>
-						<input id="${column.columnNameFirstLower}" class="form-control input-from-control" placeholder="结束时间" value="<fmt:formatDate value='<@jspEl "query."+column.columnNameFirstLower+'End'/>' pattern='yyyy-MM-dd'/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="${column.columnNameFirstLower}End" name="${column.columnNameFirstLower}End"   />
 						
 						<#else>
 						<div class="input-group-addon">
 							<#if column.comment??>
 							${column.comment}
-							< #else>
+							<#else>
 							${column.columnNameFirstLower}
 							</#if>						
 						</div>

@@ -6,7 +6,7 @@
         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     version="3.0">
 	
-	<display-name>adplatform web application</display-name>
+	<display-name>${projectCode} web application</display-name>
 	
 	<!-- session超时定义,单位为分钟 -->
 	<session-config>
@@ -79,7 +79,7 @@
 	<!-- LoggerMDCFilter,存放在MDC中的数据，log4j可以直接引用并作为日志信息打印出来. -->
 	<filter>
 		<filter-name>LoggerMDCFilter</filter-name>
-		<filter-class>com.xsj.gen.common.web.filter.LoggerMDCFilter</filter-class>
+		<filter-class>${basePackage}.common.web.filter.LoggerMDCFilter</filter-class>
 	</filter>
 
 	<filter-mapping>

@@ -7,6 +7,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
+import java.util.*;
 
 /**
 <#include "/java_description.include">
@@ -23,6 +24,24 @@ public class ${className} implements Serializable {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	
+	public int hashCode() {
+		return new HashCodeBuilder()
+		<#list table.pkColumns as column>
+			.append(get${column.columnNameFirstUpper}())
+		</#list>
+			.toHashCode();
+	}
+	
+	public boolean equals(Object obj) {
+		if(this == obj) return true;
+		if(obj instanceof ${className} == false) return false;
+		${className} other = (${className})obj;
+		return new EqualsBuilder()
+			<#list table.pkColumns as column>
+			.append(get${column.columnNameFirstUpper}(), other.get${column.columnNameFirstUpper}())
+			</#list>
+			.isEquals();
+	}
 }
 
 <#macro generateFields>
@@ -30,12 +49,7 @@ public class ${className} implements Serializable {
 	<#if column.comment??>
 	/** ${column.comment} **/
 	</#if>
-	<#if column.isDateTimeColumn && !column.contains("begin, start, end")>
-	private ${column.javaType} ${column.columnNameFirstLower}Begin;
-	private ${column.javaType} ${column.columnNameFirstLower}End;
-	<#else>
 	private ${column.javaType} ${column.columnNameFirstLower};
-	</#if>
 	</#list>
 </#macro>
 
@@ -44,24 +58,6 @@ public class ${className} implements Serializable {
 	<#assign javaType = column.javaType> 
 	<#assign columnNameFirstUpper = column.columnNameFirstUpper> 
 	<#assign columnNameFirstLower = column.columnNameFirstLower> 
-	<#if column.isDateTimeColumn && !column.contains("begin, start, end")>
-	public ${javaType} get${columnNameFirstUpper}Begin() {
-		return this.${columnNameFirstLower}Begin;
-	}
-	
-	public void set${columnNameFirstUpper}Begin(${javaType} ${columnNameFirstLower}Begin) {
-		this.${columnNameFirstLower}Begin = ${columnNameFirstLower}Begin;
-	}	
-	
-	public ${javaType} get${columnNameFirstUpper}End() {
-		return this.${columnNameFirstLower}End;
-	}
-	
-	public void set${columnNameFirstUpper}End(${javaType} ${columnNameFirstLower}End) {
-		this.${columnNameFirstLower}End = ${columnNameFirstLower}End;
-	}
-	
-	<#else>
 	public ${javaType} get${columnNameFirstUpper}() {
 		return this.${columnNameFirstLower};
 	}
@@ -69,7 +65,7 @@ public class ${className} implements Serializable {
 	public void set${columnNameFirstUpper}(${javaType} ${columnNameFirstLower}) {
 		this.${columnNameFirstLower} = ${columnNameFirstLower};
 	}
-	</#if>	
+	
 	</#list>
 </#macro>
 

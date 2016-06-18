@@ -4,11 +4,9 @@
 package ${basePackage}.dao;
 
 <#include "/java_imports.include">
-
 import java.util.List;
-
-import ${basePackage}.model.*;
-import ${basePackage}.query.*;
+import ${basePackage}.model.${className};
+import ${basePackage}.query.${className}Query;
 
 /**
  * tableName: ${table.sqlName}

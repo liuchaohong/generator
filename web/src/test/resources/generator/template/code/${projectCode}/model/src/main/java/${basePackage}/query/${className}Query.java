@@ -3,15 +3,15 @@
 <#assign className = table.className>   
 package ${basePackage}.query;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
+import java.util.*;
+import ${basePackage}.query.PageQuery;
 
 /**
 <#include "/java_description.include">
  */
-public class ${className} implements Serializable {
+public class ${className}Query extends PageQuery implements Serializable {
 	
     private static final long serialVersionUID = 3148176768559230877L;
     
@@ -69,6 +69,7 @@ public class ${className} implements Serializable {
 	public void set${columnNameFirstUpper}(${javaType} ${columnNameFirstLower}) {
 		this.${columnNameFirstLower} = ${columnNameFirstLower};
 	}
+	
 	</#if>	
 	</#list>
 </#macro>

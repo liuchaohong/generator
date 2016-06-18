@@ -7,10 +7,20 @@ package ${basePackage}.query;
  */
 public class PageQuery {
 
+	private String sort;
+	
 	private Integer offset;
 	
 	private Integer limit;
 
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}	
+	
 	public Integer getOffset() {
 		return offset;
 	}

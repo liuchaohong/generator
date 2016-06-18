@@ -2,6 +2,7 @@ package com.github.generator.model;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.github.generator.util.StringHelper;
@@ -21,6 +22,7 @@ public class GenTable {
 	/**
 	 * 映射属性
 	 */
+	private String deleteClassNamePrefixs;
 	private String className;
 	private String classNameFirstLower; 
 	
@@ -30,7 +32,16 @@ public class GenTable {
 
 	public void setSqlName(String sqlName) {
 		this.sqlName = sqlName;
-		this.className = StringHelper.getClassName(sqlName);
+		String sqlClassName = sqlName;
+		if (StringUtils.isNotBlank(deleteClassNamePrefixs)) {//去掉表前缀 wh_metadata_ds => metadata_ds
+			String[] deleteClassNamePrefixArray = deleteClassNamePrefixs.split(",");
+			for (int i = 0; i < deleteClassNamePrefixArray.length; i++) {
+				if (sqlName.contains(deleteClassNamePrefixArray[i])) {
+					sqlClassName = sqlName.replace(deleteClassNamePrefixArray[i], "");
+				}
+			}
+		}
+		this.className = StringHelper.getClassName(sqlClassName);
 		this.classNameFirstLower = StringHelper.toLowerCaseFirstOne(className);
 	}
 
@@ -66,6 +77,14 @@ public class GenTable {
 		this.comment = comment;
 	}
 
+	public String getDeleteClassNamePrefixs() {
+		return deleteClassNamePrefixs;
+	}
+
+	public void setDeleteClassNamePrefixs(String deleteClassNamePrefixs) {
+		this.deleteClassNamePrefixs = deleteClassNamePrefixs;
+	}
+
 	public String getClassName() {
 		return className;
 	}
@@ -81,7 +100,7 @@ public class GenTable {
 	public void setClassNameFirstLower(String classNameFirstLower) {
 		this.classNameFirstLower = classNameFirstLower;
 	}
-
+	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

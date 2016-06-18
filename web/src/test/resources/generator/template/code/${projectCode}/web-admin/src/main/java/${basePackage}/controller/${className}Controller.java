@@ -3,41 +3,28 @@
 <#assign classNameFirstLower = table.classNameFirstLower> 
 package ${basePackage}.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
-import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.alibaba.fastjson.JSON;
-import com.github.rapid.common.beanutils.BeanUtils;
-import com.github.rapid.common.exception.MessageException;
-import com.github.rapid.common.web.scope.Flash;
-import com.xsj.gen.controller.GameController;
-import com.xsj.gen.model.Game;
-import com.xsj.gen.model.Page;
-import com.xsj.gen.query.GameQuery;
-import com.xsj.gen.service.GameService;
 import com.github.rapid.common.util.CollectionUtil;
 import com.github.rapid.common.util.CsvFileUtil;
+import com.github.rapid.common.web.scope.Flash;
+import ${basePackage}.model.Page;
+import ${basePackage}.model.${className};
+import ${basePackage}.query.${className}Query;
+import ${basePackage}.service.${className}Service;
 
 @Controller
 @RequestMapping("/${classNameFirstLower}")
@@ -130,7 +117,7 @@ public class ${className}Controller {
 		List<${className}> items = CollectionUtil.toBeanList(maps, ${className}.class);
 		int successCount = 0;
 		int errorCount = 0;
-		for(Game item : items) {
+		for(${className} item : items) {
 			try {
 				${classNameFirstLower}Service.insert(item);
 				successCount++;

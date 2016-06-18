@@ -34,7 +34,7 @@
 		
 			<div class="form-group">
 				<div class="text-center">
-					<a class="btn btn-default" href="${r'${ctx}'}/game/index.do">返回列表</a>&nbsp;&nbsp;&nbsp;
+					<a class="btn btn-default" href="${r'${ctx}'}/${classNameFirstLower}/index.do">返回列表</a>&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn btn-default" value="后退" onclick="history.back();"/>
 				</div>
 			</div>

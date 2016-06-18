@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.ResourceUtils;
 
+import freemarker.template.utility.StringUtil;
 import junit.framework.TestCase;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
@@ -72,8 +74,11 @@ public class CreateTableTest extends TestCase {
 		for(ColumnDefinition columnDefinition : columnDefinitions){
 			System.out.println(columnDefinition.getColumnName().replace("`", "") + ":" + columnDefinition.getColDataType().getDataType());
 			
+			List<String> columnSpecStrings = columnDefinition.getColumnSpecStrings();
+			if (StringUtils.equalsIgnoreCase(columnSpecStrings.get(columnSpecStrings.size()-2), "comment")) {
+				System.out.println(columnSpecStrings.get(columnSpecStrings.size()-1).replace("'", ""));
+			}
 			
-//			System.out.println("==============================");
 		}
 		System.out.println(((Index)createTable.getIndexes().get(0)).getColumnsNames().get(0));
 	}

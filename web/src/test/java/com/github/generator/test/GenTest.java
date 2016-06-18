@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +38,19 @@ public class GenTest {
     @Test
     public void genTest() throws FileNotFoundException, IOException, TemplateException, JSQLParserException{
 //    	String src = FileUtils.readFileToString(ResourceUtils.getFile("classpath:template/${className}Controller.java"));
-    	
-    	
-		String statement = FileUtils.readFileToString(ResourceUtils.getFile("classpath:test_sql/a.sql"));
+		String createSqlStr = FileUtils.readFileToString(ResourceUtils.getFile("classpath:test_sql/a.sql"));
+		String systemTime = String.valueOf(System.currentTimeMillis());
+		if (StringUtils.isNotBlank(createSqlStr)) {
+			String[] createSqlArray = createSqlStr.split(";");
+			for (int i = 0; i < createSqlArray.length; i++) {
+				genCmd(createSqlArray[i], systemTime);
+			}
+		}
+    }
+    
+    private void genCmd(String createSql, String systemTime) throws JSQLParserException, FileNotFoundException{
 		CCJSqlParserManager parserManager = new CCJSqlParserManager();
-		CreateTable createTable = (CreateTable) parserManager.parse(new StringReader(statement));
+		CreateTable createTable = (CreateTable) parserManager.parse(new StringReader(createSql));
 		String tableName = StringHelper.replace(createTable.getTable().getName());
 		List<GenColumn> columns = new ArrayList<GenColumn>();
 		List<ColumnDefinition> columnDefinitions = createTable.getColumnDefinitions();
@@ -59,6 +68,11 @@ public class GenTest {
 			GenColumn genColumn = new GenColumn();
 			genColumn.setSqlName(columnName);
 			genColumn.setDataType(columnDefinition.getColDataType().getDataType());
+			List<String> columnSpecStrings = columnDefinition.getColumnSpecStrings();
+			if (StringUtils.equalsIgnoreCase(columnSpecStrings.get(columnSpecStrings.size()-2), "comment")) {
+				String comment = columnSpecStrings.get(columnSpecStrings.size()-1).replace("'", "");
+				genColumn.setComment(comment);
+			}
 			columns.add(genColumn);
 			
 			if (replacePrimaryKeys.contains(columnName)) {
@@ -66,29 +80,27 @@ public class GenTest {
 			}else{
 				notPkColumns.add(genColumn);
 			}
-				
 		}
 		
 		GenTable genTable = new GenTable();
+		genTable.setDeleteClassNamePrefixs("wh_,tv_");
 		genTable.setSqlName(tableName);
 		genTable.setColumns(columns);
 		genTable.setPkColumns(pkColumns);
 		genTable.setNotPkColumns(notPkColumns);
 		System.out.println(genTable);
 		
-		
     	Map<String, Object> paramMap = new HashMap<String, Object>();
-    	paramMap.put("basePackage", "com.test.package");
+    	paramMap.put("basePackage", "com.test.projectx");
     	paramMap.put("classNameFirstLower", genTable.getClassNameFirstLower());
     	paramMap.put("className", genTable.getClassName());
-    	paramMap.put("projectCode", "whale");
+    	paramMap.put("projectCode", "projectx");
     	paramMap.put("table", genTable);
     	paramMap.put("author", "LIUCHAOHONG");
     	
     	//文件输出路径
 //    	String templateOutputDir = System.getProperty("java.io.tmpdir");
     	File genFile = ResourceUtils.getFile("classpath:generator/templateOutput");
-    	String systemTime = String.valueOf(System.currentTimeMillis());
     	//模板路径
     	File templateCodeDir = ResourceUtils.getFile("classpath:generator/template/code");
     	File templateCustomDir = ResourceUtils.getFile("classpath:generator/template/custom");

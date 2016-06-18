@@ -1,14 +1,13 @@
 <#include "/java_copyright.include">
 <#assign className = table.className>   
 <#assign classNameFirstLower = table.classNameFirstLower>  
-package ${basePackage}.dao;
+package ${basePackage}.service;
 
 <#include "/java_imports.include">
-
 import java.util.List;
-
-import ${basePackage}.model.*;
-import ${basePackage}.query.*;
+import ${basePackage}.model.Page;
+import ${basePackage}.model.${className};
+import ${basePackage}.query.${className}Query;
 
 /**
  * tableName: ${table.sqlName}
@@ -32,5 +31,7 @@ public interface ${className}Service {
 	public List<${className}> getList(${className}Query query);	
 	
 	public int getCount(${className}Query query);
+	
+	public Page<${className}> getPage(${className}Query query);
 	
 }

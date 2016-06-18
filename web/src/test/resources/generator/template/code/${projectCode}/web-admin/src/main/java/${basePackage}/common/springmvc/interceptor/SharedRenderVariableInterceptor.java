@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -30,7 +29,7 @@ public class SharedRenderVariableInterceptor extends HandlerInterceptorAdapter i
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		log.info("请注意,在这里可以存放渲染视图时需要的的共享变量");
+		logger.info("请注意,在这里可以存放渲染视图时需要的的共享变量");
 		if(modelAndView == null) {
 			return;
 		}

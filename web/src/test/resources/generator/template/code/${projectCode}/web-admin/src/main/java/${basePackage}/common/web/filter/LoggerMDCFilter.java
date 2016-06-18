@@ -24,19 +24,18 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class LoggerMDCFilter extends OncePerRequestFilter implements Filter {
     
-	private static Logger logger = LoggerFactory.getLogger(SharedRenderVariableInterceptor.class);
+	private static Logger logger = LoggerFactory.getLogger(LoggerMDCFilter.class);
 	
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain chain)throws ServletException,IOException {
         try {
             //示例为一个固定的登陆用户,请直接修改代码
             MDC.put("loginUserId", "demo-loginUsername");
-            
             MDC.put("req.requestURI", StringUtils.defaultString(request.getRequestURI()));
             MDC.put("req.queryString", StringUtils.defaultString(request.getQueryString()));
             MDC.put("req.requestURIWithQueryString", request.getRequestURI() + (request.getQueryString() == null ? "" : "?"+request.getQueryString()));
             MDC.put("req.remoteAddr", StringUtils.defaultString(request.getRemoteAddr()));
             
-            
+            logger.info("LoggerMDCFilter...");
             chain.doFilter(request, response);
         }finally {
             clearMDC();
