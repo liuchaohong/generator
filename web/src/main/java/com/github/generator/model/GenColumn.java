@@ -9,13 +9,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import com.github.generator.util.StringHelper;
 
 public class GenColumn {
-
+	/** 列名 **/
 	private String sqlName;
-	
+	/** 数据类型 **/
 	private String dataType;
-	
+	/** 数据长度 **/
 	private String dataLength;
-	
+	/** 注释 **/
 	private String comment;
 
 	/** 映射属性 begin **/

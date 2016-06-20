@@ -1,4 +1,4 @@
-package com.github.generator.executor;
+package com.github.generator.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,10 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DateUtils;
 
-import cn.org.rapid_framework.generator.util.FreemarkerHelper;
-import cn.org.rapid_framework.generator.util.GLogger;
 import cn.org.rapid_framework.generator.util.StringHelper;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
@@ -98,10 +97,20 @@ public class FreemarkerUtil {
 	public static Map<String, Object> getDefaultParamMap() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("DateUtils", new DateUtils());
+		params.put("defaultDate", DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
 		params.put("sysTime", new Date());
 		return params;
 	}
 	
+	/**
+	 * 模板解析
+	 * @param template
+	 * @param paramMap
+	 * @param encoding
+	 * @return
+	 * @throws IOException
+	 * @throws TemplateException
+	 */
 	public static String processTemplate(Template template, Map<String, Object> paramMap, String encoding) throws IOException, TemplateException {
 		Writer writer = null;
 		String result;
@@ -117,6 +126,15 @@ public class FreemarkerUtil {
 		return result;
 	}
 	
+	/**
+	 * 模板解析
+	 * @param template
+	 * @param model
+	 * @param outputFile
+	 * @param encoding
+	 * @throws IOException
+	 * @throws TemplateException
+	 */
 	public static void processTemplate(Template template, Map<String, Object> model, File outputFile,String encoding) throws IOException, TemplateException {
 		Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), encoding));
 		template.process(model, out);
@@ -136,7 +154,8 @@ public class FreemarkerUtil {
 		conf.setNumberFormat("###############");
 		conf.setBooleanFormat("true, false");
 		conf.setDefaultEncoding("utf-8");
-			
+		
+		//默认加载macro.include文件
 		List<String> autoIncludes = getParentPaths(templateName, "macro.include");
 		List<String> availableAutoInclude = getAvailableAutoInclude(conf, autoIncludes);
 		conf.setAutoIncludes(availableAutoInclude);

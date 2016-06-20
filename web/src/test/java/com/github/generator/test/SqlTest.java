@@ -18,9 +18,9 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import org.junit.Test;
 import org.springframework.util.ResourceUtils;
 
-import com.github.generator.executor.FreemarkerUtil;
 import com.github.generator.executor.GenCmd;
 import com.github.generator.util.FileHelper;
+import com.github.generator.util.FreemarkerUtil;
 
 import cn.org.rapid_framework.generator.util.StringHelper;
 import freemarker.cache.FileTemplateLoader;

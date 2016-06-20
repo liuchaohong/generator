@@ -9,3 +9,12 @@
 <%-- <%@ taglib uri="http://github.com/badqiu/rapid-framework" prefix="rapid" %> --%>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+
+<!--=== JavaScript ===-->
+<script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.cookie.js"></script>
+
+<!-- Bootstrap -->
+<link href="${ctx}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="${ctx}/lib/bootstrap/js/bootstrap.min.js"></script>
+

@@ -8,23 +8,22 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import com.github.generator.util.StringHelper;
 
 public class GenTable {
-	
+	/** 表名 **/
 	private String sqlName;
-	
+	/** 列名 **/
 	private List<GenColumn> columns;
-	
+	/** 主键列 **/
 	private List<GenColumn> pkColumns;
-	
+	/** 非主键列 **/
 	private List<GenColumn> notPkColumns;
-	
+	/** 注释  **/
 	private String comment;
 
-	/**
-	 * 映射属性
-	 */
-	private String deleteClassNamePrefixs;
+	/** 映射属性 begin **/
+	private String tableRemovePrefixes;
 	private String className;
 	private String classNameFirstLower; 
+	/** 映射属性 end **/
 	
 	public String getSqlName() {
 		return sqlName;
@@ -33,8 +32,8 @@ public class GenTable {
 	public void setSqlName(String sqlName) {
 		this.sqlName = sqlName;
 		String sqlClassName = sqlName;
-		if (StringUtils.isNotBlank(deleteClassNamePrefixs)) {//去掉表前缀 wh_metadata_ds => metadata_ds
-			String[] deleteClassNamePrefixArray = deleteClassNamePrefixs.split(",");
+		if (StringUtils.isNotBlank(tableRemovePrefixes)) {//去掉表前缀 wh_metadata_ds => metadata_ds
+			String[] deleteClassNamePrefixArray = tableRemovePrefixes.split(",");
 			for (int i = 0; i < deleteClassNamePrefixArray.length; i++) {
 				if (sqlName.contains(deleteClassNamePrefixArray[i])) {
 					sqlClassName = sqlName.replace(deleteClassNamePrefixArray[i], "");
@@ -77,12 +76,12 @@ public class GenTable {
 		this.comment = comment;
 	}
 
-	public String getDeleteClassNamePrefixs() {
-		return deleteClassNamePrefixs;
+	public String getTableRemovePrefixes() {
+		return tableRemovePrefixes;
 	}
 
-	public void setDeleteClassNamePrefixs(String deleteClassNamePrefixs) {
-		this.deleteClassNamePrefixs = deleteClassNamePrefixs;
+	public void setTableRemovePrefixes(String tableRemovePrefixes) {
+		this.tableRemovePrefixes = tableRemovePrefixes;
 	}
 
 	public String getClassName() {
