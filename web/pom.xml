@@ -21,13 +21,6 @@
   
   	<dependencies>
 
-		<!-- project dependency -->
-		<dependency>
-			<groupId>com.github.generator</groupId>
-			<artifactId>generator-agent</artifactId>
-			<version>1.0</version>
-		</dependency>
-		
 		<!-- spring begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -123,11 +116,11 @@
 		    <version>4.0.6</version>
 		</dependency>
 
-<dependency>
-    <groupId>com.github.jsqlparser</groupId>
-    <artifactId>jsqlparser</artifactId>
-    <version>0.9.5</version>
-</dependency>
+		<dependency>
+		    <groupId>com.github.jsqlparser</groupId>
+		    <artifactId>jsqlparser</artifactId>
+		    <version>0.9.5</version>
+		</dependency>
 		 	
     
   </dependencies>

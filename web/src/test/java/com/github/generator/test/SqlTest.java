@@ -3,18 +3,12 @@ package com.github.generator.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.junit.Test;
 import org.springframework.util.ResourceUtils;
 
@@ -23,8 +17,6 @@ import com.github.generator.util.FileHelper;
 import com.github.generator.util.FreemarkerUtil;
 
 import cn.org.rapid_framework.generator.util.StringHelper;
-import freemarker.cache.FileTemplateLoader;
-import freemarker.cache.MultiTemplateLoader;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import net.sf.jsqlparser.JSQLParserException;

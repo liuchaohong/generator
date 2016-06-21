@@ -1,7 +1,8 @@
 package com.github.generator.test;
 
+import static com.github.generator.test.TestUtils.assertSqlCanBeParsedAndDeparsed;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -14,7 +15,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.ResourceUtils;
 
-import freemarker.template.utility.StringUtil;
 import junit.framework.TestCase;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserManager;
@@ -22,7 +22,6 @@ import net.sf.jsqlparser.statement.create.table.ColumnDefinition;
 import net.sf.jsqlparser.statement.create.table.CreateTable;
 import net.sf.jsqlparser.statement.create.table.Index;
 import net.sf.jsqlparser.util.TablesNamesFinder;
-import static com.github.generator.test.TestUtils.*;
 
 public class CreateTableTest extends TestCase {
 
