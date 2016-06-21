@@ -46,9 +46,9 @@ public class ${className}DaoImpl extends BaseSpringJdbcDao implements ${classNam
 	
 	public int insert(${className} entity){
 		String sql = "insert into ${table.sqlName} " 
-				 + " (<#list table.notPkColumns as column>${column.sqlName}<#if column_has_next>, </#if></#list>) " 
+				 + " (<#list table.columns as column>${column.sqlName}<#if column_has_next>, </#if></#list>) " 
 				 + " values "
-				 + " (<#list table.notPkColumns as column>:${column.columnNameFirstLower}<#if column_has_next>, </#if></#list>)";
+				 + " (<#list table.columns as column>:${column.columnNameFirstLower}<#if column_has_next>, </#if></#list>)";
 		return insertWithGeneratedKey(entity,sql); //for sqlserver:identity and mysql:auto_increment
 		//其它主键生成策略
 		//insertWithOracleSequence(entity,"sequenceName",sql); //oracle sequence: 

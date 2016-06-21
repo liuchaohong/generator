@@ -74,7 +74,7 @@ public class ${className}ServiceImpl implements ${className}Service {
 	
 	public Page<${className}> getPage(${className}Query query) {
 		Assert.notNull(query, "'query' must be not null");
-		Page<${className}> page = new Page<>();
+		Page<${className}> page = new Page<${className}>();
 		page.setRows(getList(query));
 		page.setTotal(getCount(query));
 		return page;
