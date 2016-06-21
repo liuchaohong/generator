@@ -29,6 +29,7 @@ public class GenColumn {
 		javaTypeMap = new HashMap<String,String>();
 		javaTypeMap.put("int", "Integer");
 		javaTypeMap.put("tinyint", "Integer");
+		javaTypeMap.put("smallint", "Integer");
 		javaTypeMap.put("varchar", "String");
 		javaTypeMap.put("datetime", "Date");
 	}
