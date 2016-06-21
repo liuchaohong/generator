@@ -33,6 +33,11 @@ import net.sf.jsqlparser.statement.create.table.ColumnDefinition;
 import net.sf.jsqlparser.statement.create.table.CreateTable;
 import net.sf.jsqlparser.statement.create.table.Index;
 
+/**
+ * 
+ * @author LIUCHAOHONG
+ *
+ */
 public class GenCmd {
 
 	private static Logger logger = LoggerFactory.getLogger(GenTest.class);
@@ -59,9 +64,14 @@ public class GenCmd {
 		}
 	}
 
-    private void genBySql(String createSql) throws JSQLParserException, IOException{
+    private void genBySql(String createSql) throws IOException{
 		CCJSqlParserManager parserManager = new CCJSqlParserManager();
-		CreateTable createTable = (CreateTable) parserManager.parse(new StringReader(createSql));
+		CreateTable createTable = null;
+		try {
+			 createTable = (CreateTable) parserManager.parse(new StringReader(createSql));
+		} catch (JSQLParserException e) {
+			throw new RuntimeException("sql parse error, please check your sql...", e);
+		}
 		String tableName = StringHelper.replace(createTable.getTable().getName());
 		List<GenColumn> columns = new ArrayList<GenColumn>();
 		List<ColumnDefinition> columnDefinitions = createTable.getColumnDefinitions();
@@ -160,7 +170,7 @@ public class GenCmd {
      */
     private boolean isSkipFile(File file){
     	boolean flag = false;
-    	List<String> skipExtensions = Arrays.asList(".js", ".css", ".csv", ".map", ".jpg", ".png", ".gif", ".eot", ".svg", ".ttf", ".woff", ".woff2");
+    	List<String> skipExtensions = Arrays.asList(".js", ".css", ".csv", ".map", ".jpg", ".png", ".gif", ".doc", ".txt", ".eot", ".svg", ".ttf", ".woff", ".woff2");
     	String fileName = file.getName();
     	String fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
     	if (skipExtensions.contains(fileExtension)) {

@@ -16,13 +16,13 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.util.Assert;
 
-import cn.org.rapid_framework.generator.GeneratorConstants;
-import cn.org.rapid_framework.generator.GeneratorContext;
-import cn.org.rapid_framework.generator.GeneratorFacade;
-
 import com.github.generator.common.util.PropertiesHolder;
 import com.github.generator.common.util.SqlHelper;
 import com.github.generator.common.util.ZipHelper;
+
+import cn.org.rapid_framework.generator.GeneratorConstants;
+import cn.org.rapid_framework.generator.GeneratorContext;
+import cn.org.rapid_framework.generator.GeneratorFacade;
 
 public class GenCmdExecutor {
 	public String sqls;

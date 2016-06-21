@@ -2,7 +2,6 @@ package com.github.generator.common.util;
 
 import cn.org.rapid_framework.generator.provider.db.table.model.Column;
 import cn.org.rapid_framework.generator.util.typemapping.DatabaseDataTypesUtils;
-import freemarker.template.TemplateModel;
 
 public class GeneratorColumnUtil{
 
