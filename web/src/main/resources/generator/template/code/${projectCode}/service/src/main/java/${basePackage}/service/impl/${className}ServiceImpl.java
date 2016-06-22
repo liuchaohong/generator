@@ -5,10 +5,13 @@ package ${basePackage}.service.impl;
 
 <#include "/java_imports.include">
 import java.util.*;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import com.xsj.datacore.common.util.ListSortUtil;
 import ${basePackage}.model.Page;
 import ${basePackage}.service.${className}Service;
 import ${basePackage}.model.${className};
@@ -75,8 +78,14 @@ public class ${className}ServiceImpl implements ${className}Service {
 	public Page<${className}> getPage(${className}Query query) {
 		Assert.notNull(query, "'query' must be not null");
 		Page<${className}> page = new Page<${className}>();
-		page.setRows(getList(query));
-		page.setTotal(getCount(query));
+		List<${className}> list = getList(query);
+		Integer total = getCount(query);
+		if (StringUtils.isNotBlank(query.getSort()) && StringUtils.isNotBlank(query.getOrder())) {//排序
+			   ListSortUtil<${className}> sortList = new ListSortUtil<${className}>(); 
+			   sortList.sort(list, query.getSort(), query.getOrder()); 
+		}
+		page.setRows(list);
+		page.setTotal(total);
 		return page;
 	}
 }

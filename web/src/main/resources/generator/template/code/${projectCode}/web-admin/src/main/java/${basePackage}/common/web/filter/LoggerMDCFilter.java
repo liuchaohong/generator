@@ -42,6 +42,7 @@ public class LoggerMDCFilter extends OncePerRequestFilter implements Filter {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private static void clearMDC() {
         Map map = MDC.getContext();
         if(map != null) {

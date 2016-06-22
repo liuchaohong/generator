@@ -6,20 +6,11 @@ package ${basePackage}.query;
  *
  */
 public class PageQuery {
-
-	private String sort;
 	
 	private Integer offset;
-	
 	private Integer limit;
-
-	public String getSort() {
-		return sort;
-	}
-
-	public void setSort(String sort) {
-		this.sort = sort;
-	}	
+	private String sort;
+	private String order;
 	
 	public Integer getOffset() {
 		return offset;
@@ -35,6 +26,22 @@ public class PageQuery {
 
 	public void setLimit(Integer limit) {
 		this.limit = limit;
+	}
+	
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
 	}
 	
 }

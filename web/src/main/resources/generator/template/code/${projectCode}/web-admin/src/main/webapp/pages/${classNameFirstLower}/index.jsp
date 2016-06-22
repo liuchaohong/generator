@@ -4,7 +4,7 @@
 <#assign classNameFirstLower = table.classNameFirstLower>
 <#assign dollar = '$'>
 <#macro editFormatterParams><#list table.pkColumns as column><#if column_index == 0>+'${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}<#else>+'&${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}</#if></#list></#macro>
-<#macro queryParams><#list table.columns as column><#if column_index == 0>+'${column.columnNameFirstLower}='+${column.columnNameFirstLower}<#else>+'&${column.columnNameFirstLower}='+row.${column.columnNameFirstLower}</#if></#list></#macro>	
+<#macro queryParams><#list table.columns as column><#if column_index == 0>+'${column.columnNameFirstLower}='+${column.columnNameFirstLower}<#else>+'&${column.columnNameFirstLower}='+${column.columnNameFirstLower}</#if></#list></#macro>	
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/commons/taglibs.jsp" %>

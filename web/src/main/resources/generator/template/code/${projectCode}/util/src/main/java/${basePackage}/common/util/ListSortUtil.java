@@ -11,8 +11,7 @@ import java.util.List;
    ListSortUtil<T> sortList = new ListSortUtil<T>(); 
    sortList.sort(beans, "field", "asc");  
    
- * @author ${author}
- * @date 2016年5月30日
+<#include "/java_description.include">
  *
  */
 public class ListSortUtil<T> {  

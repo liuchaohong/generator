@@ -5,7 +5,6 @@ package ${basePackage}.query;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import java.io.Serializable;
-import java.util.*;
 import ${basePackage}.query.PageQuery;
 
 /**

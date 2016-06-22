@@ -31,7 +31,6 @@
 	});
 	</script>
 
-
 </head>
 
 <body>
@@ -68,6 +67,26 @@
 			</ul>
 			<!-- /Top Left Menu -->
 
+			<!-- Top Right Menu -->
+			<ul class="nav navbar-nav navbar-right">
+				<!-- User Login Dropdown -->
+				<li class="dropdown user">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<!--<img alt="" src="assets/img/avatar1_small.jpg" />-->
+						<i class="glyphicon glyphicon-user"></i>
+						<span class="username">用户名</span>
+						<i class="icon-caret-down small"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="https://dcauth.xoyo.com/editUser.do"><i class="icon-user"></i> 个人信息修改</a></li>
+						<li><a href="https://dcauth.xoyo.com/index.do"><i class="icon-calendar"></i> 权限申请</a></li>
+					</ul>
+					<li><a href="${ctx}/logout.do"><span class="glyphicon glyphicon-off" style="margin-right:8px"  ></span>退出</a></li>
+				</li>
+				<!-- /user login dropdown -->
+			</ul>
+			<!-- /Top Right Menu -->
+			
 		</div>
 		<!-- /top navigation bar -->
 	</header> <!-- /.header -->
