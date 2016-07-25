@@ -65,6 +65,7 @@ public class GenCmd {
 	}
 
     private void genBySql(String createSql) throws IOException{
+    	createSql = StringUtils.trim(createSql);
 		CCJSqlParserManager parserManager = new CCJSqlParserManager();
 		CreateTable createTable = null;
 		try {
@@ -184,7 +185,7 @@ public class GenCmd {
 	}
 
 	public void setProjectCode(String projectCode) {
-		this.projectCode = projectCode;
+		this.projectCode = StringUtils.trim(projectCode);
 	}
 
 	public String getAuthor() {
@@ -192,7 +193,7 @@ public class GenCmd {
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		this.author = StringUtils.trim(author);
 	}
 
 	public String getSqls() {
@@ -200,7 +201,7 @@ public class GenCmd {
 	}
 
 	public void setSqls(String sqls) {
-		this.sqls = sqls;
+		this.sqls = StringUtils.trim(sqls);
 	}
 
 	public String getBasePackage() {
@@ -208,7 +209,7 @@ public class GenCmd {
 	}
 
 	public void setBasePackage(String basePackage) {
-		this.basePackage = basePackage;
+		this.basePackage = StringUtils.trim(basePackage);
 	}
 
 	public String getTableRemovePrefixes() {
@@ -216,7 +217,7 @@ public class GenCmd {
 	}
 
 	public void setTableRemovePrefixes(String tableRemovePrefixes) {
-		this.tableRemovePrefixes = tableRemovePrefixes;
+		this.tableRemovePrefixes = StringUtils.trim(tableRemovePrefixes);
 	}
 
 	public String getOutputRootDir() {
@@ -224,7 +225,7 @@ public class GenCmd {
 	}
 
 	public void setOutputRootDir(String outputRootDir) {
-		this.outputRootDir = outputRootDir;
+		this.outputRootDir = StringUtils.trim(outputRootDir);
 	}
 	
 }
