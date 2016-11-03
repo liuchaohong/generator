@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import com.xsj.datacore.common.util.ListSortUtil;
+import ${basePackage}.common.util.ListSortUtil;
 import ${basePackage}.model.Page;
 import ${basePackage}.service.${className}Service;
 import ${basePackage}.model.${className};
